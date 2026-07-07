@@ -1,25 +1,27 @@
-import { Page } from '@playwright/test'
+import { Page, expect } from '@playwright/test'
+import { BasePage } from './BasePage'
+export class HomePage extends BasePage {
 
-export class HomePage {
-    page: Page;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page)
     }
 
     //()=> arrow function - its always bound to current page state
     //
-    private newCarsMenu = () => this.page.locator("//div[normalize-space()='NEW CARS']");
-    private findNewCarsMenu = () => this.page.locator("//div[contains(text(),'Find New Cars')]")
+    //private newCarsMenu = () => this.page.getByText('NEW CARS', { exact: true });
+    //private findNewCarsMenu = () => this.page.getByRole('link', { name: 'Find New Cars' });
 
     async navigateToHomePage() {
-        await this.page.goto("/")
+        await this.navigateTo("/")
     }
 
     async findNewCars() {
-        await this.newCarsMenu().hover();
-        await this.findNewCarsMenu().click();
-        await this.page.waitForTimeout(2000);
+
+        await this.hover("//div[normalize-space()='NEW CARS']");
+        await this.timeout(5000);
+        await this.isElementVisible("//div[contains(text(),'Find New Cars')]");
+        await this.click("//div[contains(text(),'Find New Cars')]");
     }
 
     async searchCar() { }
