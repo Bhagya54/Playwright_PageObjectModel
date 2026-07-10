@@ -19,27 +19,13 @@ export class BasePage {
         await this.page.locator(locator).fill(text);
     }
 
-    //async hover(locatorValue: string,locatorType:string) {
+    
     async hover(locator: string) {
-        // let ele;
-        // if(locatorType==='xpath' || locatorType==='css'){
-        //    ele = this.page.locator(locatorValue)
-        // }
-        // else if(locatorType==='text'){
-        //     ele=this.page.getByText(locatorValue, { exact: true });
-        // }
-        // else if(locatorType==='role'){
-        //     ele=this.page.getByRole('link', { name: locatorValue });
-        // }
-
-        // ele.hover()
         await this.page.locator(locator).hover();
-
-
     }
 
-    async getInnerText(locator: string) {
-        await this.page.locator(locator).innerText();
+    async getInnerText(locator: string):Promise<string> {
+        return await this.page.locator(locator).innerText();
     }
 
     async timeout(timeout: number) {
