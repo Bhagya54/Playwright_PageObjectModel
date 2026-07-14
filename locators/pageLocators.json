@@ -11,7 +11,7 @@
         "toyotaCar":"//div[normalize-space()='Toyota']",
         "tataCar":"//div[normalize-space()='Tata']"
     },
-    "bmwCarsPage":{
-
+    "carBase":{
+        "carHeader":"//header/h1[not(contains(text(),'New'))]"
     }
 }

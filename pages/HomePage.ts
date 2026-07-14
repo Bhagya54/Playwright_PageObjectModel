@@ -20,9 +20,9 @@ export class HomePage extends BasePage {
     }
 
     async findNewCars() {
-        await this.timeout(7000);
+        await this.timeout(5000);
         await this.hover(this.locator.newCars);
-        await this.timeout(2000);
+        //await this.timeout(1000);
         await this.isElementVisible(this.locator.findNewCars);
         await this.click(this.locator.findNewCars);
     }

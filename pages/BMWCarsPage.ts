@@ -6,4 +6,6 @@ export class BMWCarsPage extends BasePage {
     constructor(page: Page) {
         super(page)
     }
+
+    
 }
