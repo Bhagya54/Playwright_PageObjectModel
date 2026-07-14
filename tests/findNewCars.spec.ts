@@ -15,22 +15,10 @@ test.describe("Find New Cars Suite", () => {
             await expect(pages.page).toHaveURL("/new-cars/")
             console.log(await pages.newCarsPage.getPageHeader());
             expect(await pages.newCarsPage.getPageHeader()).toContain("New Cars");
-            if (data.carBrand === "bmw") {
-                await pages.newCarsPage.navigateToBMWCarsPage();
-                await expect(pages.page).toHaveURL(/.*bmw/)
-            }
-            else if (data.carBrand === "hyundai") {
-                await pages.newCarsPage.navigateToHyundaiCarsPage();
-                await expect(pages.page).toHaveURL(/.*hyundai/)
-            }
-            else if (data.carBrand === "tata") {
-                await pages.newCarsPage.navigateToTataCarsPage();
-                await expect(pages.page).toHaveURL(/.*tata/)
-            }
-            else if (data.carBrand === "toyota") {
-                await pages.newCarsPage.navigateToToyotaCarsPage();
-                await expect(pages.page).toHaveURL(/.*toyota/)
-            }
+
+            await pages.newCarsPage.navigateToBMWCarsPage();
+            await expect(pages.page).toHaveURL(/.*bmw/)
+
             // await pages.newCarsPage.timeout(3000)
         }
     })
@@ -58,13 +46,13 @@ test.describe("Find New Cars Suite", () => {
                 await expect(pages.page).toHaveURL(/.*toyota/)
             }
             // await pages.newCarsPage.timeout(3000)
-            const carHeaderActual=await pages.carBase.getCarHeader();
+            const carHeaderActual = await pages.carBase.getCarHeader();
             console.log(`Car Header is: ${carHeaderActual}`)
             expect(carHeaderActual).toContain(data.carHeader);
         }
     })
 
-    test.afterEach(async({pages})=>{
+    test.afterEach(async ({ pages }) => {
         await pages.page.close();
     });
 
