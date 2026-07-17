@@ -2,7 +2,6 @@
     "homePage":{
         "newCars":"//div[normalize-space()='NEW CARS']",
         "findNewCars":"//div[contains(text(),'Find New Cars')]"
-
     },
     "newCarsPage":{
         "newCarsPageHeading":"//h1[normalize-space()='New Cars']",
@@ -12,6 +11,8 @@
         "tataCar":"//div[normalize-space()='Tata']"
     },
     "carBase":{
-        "carHeader":"//header/h1[not(contains(text(),'New'))]"
+        "carHeader":"//header/h1[not(contains(text(),'New'))]",
+        "carModel":"//div/div/div[1]/div/a/h3",
+        "carPrice":"//div/div/div[1]/div/div[3]/div/span/span[1]"
     }
 }

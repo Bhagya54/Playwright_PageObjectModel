@@ -8,7 +8,7 @@ export class BasePage {
     }
 
     async navigateTo(url: string) {
-        await this.page.goto(url);
+        await this.page.goto(url,{waitUntil:'networkidle'});
     }
 
     async click(locator: string) {

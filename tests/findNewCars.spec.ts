@@ -10,7 +10,7 @@ test.describe("Find New Cars Suite", () => {
 
     const testData = readCSVData("data/testData.csv")
     test("Find New Cars Test", async ({ pages }) => {
-        for (const data of testData) {
+        
             await pages.homePage.findNewCars();
             await expect(pages.page).toHaveURL("/new-cars/")
             console.log(await pages.newCarsPage.getPageHeader());
@@ -20,10 +20,10 @@ test.describe("Find New Cars Suite", () => {
             await expect(pages.page).toHaveURL(/.*bmw/)
 
             // await pages.newCarsPage.timeout(3000)
-        }
+        
     })
 
-    test.only("Parameterization Find New Car Test", async ({ pages }) => {
+    test("Parameterization Find New Car Test", async ({ pages }) => {
         for (const data of testData) {
             await pages.homePage.findNewCars();
             await expect(pages.page).toHaveURL("/new-cars/")
@@ -51,6 +51,38 @@ test.describe("Find New Cars Suite", () => {
             expect(carHeaderActual).toContain(data.carHeader);
         }
     })
+
+    test("Get Car Models and Prices", async ({ pages }) => {
+        for (const data of testData) {
+            await pages.homePage.findNewCars();
+            await expect(pages.page).toHaveURL("/new-cars/")
+            console.log(await pages.newCarsPage.getPageHeader());
+            expect(await pages.newCarsPage.getPageHeader()).toContain("New Cars");
+            if (data.carBrand === "bmw") {
+                await pages.newCarsPage.navigateToBMWCarsPage();
+                await expect(pages.page).toHaveURL(/.*bmw/)
+            }
+            else if (data.carBrand === "hyundai") {
+                await pages.newCarsPage.navigateToHyundaiCarsPage();
+                await expect(pages.page).toHaveURL(/.*hyundai/)
+            }
+            else if (data.carBrand === "tata") {
+                await pages.newCarsPage.navigateToTataCarsPage();
+                await expect(pages.page).toHaveURL(/.*tata/)
+            }
+            else if (data.carBrand === "toyota") {
+                await pages.newCarsPage.navigateToToyotaCarsPage();
+                await expect(pages.page).toHaveURL(/.*toyota/)
+            }
+            // await pages.newCarsPage.timeout(3000)
+            const carHeaderActual = await pages.carBase.getCarHeader();
+            console.log(`Car Header is: ${carHeaderActual}`)
+            expect(carHeaderActual).toContain(data.carHeader);
+            console.log("Below are the car models and car prices of : " + data.carBrand )
+            await pages.carBase.getCarModelAndPrice();
+        }
+    })
+
 
     test.afterEach(async ({ pages }) => {
         await pages.page.close();

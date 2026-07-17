@@ -8,9 +8,23 @@ export class CarBase extends BasePage {
         super(page)
     }
 
-    private locator = pageLocators.carBase;
+    private carBaseLocators = pageLocators.carBase;
     async getCarHeader():Promise<string>{
-        return await this.getInnerText(this.locator.carHeader)
+        return await this.getInnerText(this.carBaseLocators.carHeader)
     }
     
+    async getCarModelAndPrice(){
+        const carModels= this.page.locator(this.carBaseLocators.carModel);//multiple car models- 10
+        const carPrices= this.page.locator(this.carBaseLocators.carPrice);//multiple car prices
+
+        const countCars=await carPrices.count();
+
+        for(let i=0;i<countCars;i++){
+            const carModel=await carModels.nth(i).innerText();
+            const carPrice=await carPrices.nth(i).innerText();
+            console.log(`Car Model: ${carModel} and Car Price: ${carPrice} `)
+        }
+       
+
+    }
 }
